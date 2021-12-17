@@ -1,10 +1,10 @@
 import React from 'react';
 import "./TopPointsInput.scss";
 
-export default function TopPointsInput(props) {
+export default function TopPointsInput({ callBack, text, id, value }) {
   return (<div>
-    <p></p>
-    <input type="text"></input>
+    <p>{text}</p>
+    <input type="text" id={id} onChange={callBack} value={value}></input>
   </div>)
 
 }

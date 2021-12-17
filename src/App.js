@@ -1,7 +1,8 @@
-import DiceGame from "./Pages/DiceGame";
+import DiceGame from "./Pages/DiceGame/DiceGame";
+import EnterGame from "./Pages/EnterGame/EnterGame";
 
 function App() {
-  return <DiceGame />; // component game
+  return <EnterGame />; // component game
 }
 
 export default App;

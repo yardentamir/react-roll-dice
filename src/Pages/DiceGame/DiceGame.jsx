@@ -1,43 +1,41 @@
 import React, { Component } from "react";
 import "./dicegame.scss";
-import NewGameButton from "../Components/NewGameButton/NewGameButton";
-import HoldAndDiceButtons from "../Components/HoldAndDiceButtons/HoldAndDiceButtons";
-import TopPointsInput from "../Components/TopPointsInput/TopPointsInput";
-import Player from "../Components/player/Player";
-import Dice from "../Components/Dice/Dice";
+import NewGameButton from "../../Components/NewGameButton/NewGameButton";
+import HoldAndDiceButtons from "../../Components/HoldAndDiceButtons/HoldAndDiceButtons";
+import Player from "../../Components/player/Player";
+import Dice from "../../Components/Dice/Dice";
 
 
 export default class DiceGame extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(props.maxPoints)
     this.state = {
-      pointsToWin: 100,
-      // dices: [null, null],
+      pointsToWin: sessionStorage.getItem('maxPoints'),
       gameOver: false,
       playersTurn: 0,
       players: [
         {
+          name: sessionStorage.getItem('name0'),
           totalScore: 0,
           tempScore: 0,
         },
         {
+          name: sessionStorage.getItem('name1'),
           totalScore: 0,
           tempScore: 0,
         },
       ]
     }
     this.handelDices = this.handelDices.bind(this);
-    this.tempScorePlayer = this.tempScorePlayer.bind(this);
-    this.dicesArr = [null, null];
+    this.handelHold = this.handelHold.bind(this);
+    this.dicesArr = [];
   }
 
   handelDices() {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < this.dicesArr.length; i++) {
       this.dicesArr[i] = Math.floor(Math.random() * 6) + 1;
-      // this.setState((pervState) => {
-      //   return pervState.dices[i] = Math.floor(Math.random() * 6) + 1;
-      // })
     }
     console.log(this.dicesArr);
     if (this.dicesArr[0] === 6 && this.dicesArr[1] === 6) {
@@ -84,14 +82,33 @@ export default class DiceGame extends Component {
     });
   }
 
+  handelHold() {
+    this.state.players.forEach((player) => {
+      if (player.totalScore >= this.state.pointsToWin) {
+        this.winningMessage(player);
+        return;
+      }
+    })
+    this.ChangeTurn();
+  }
+
+  winningMessage() {
+    this.state.players.forEach((player) => {
+      if (player.totalScore >= this.state.pointsToWin) {
+        console.log(player.name);
+        return;
+      }
+    })
+  }
+
   resetGame() {
     this.setState((pervState) => {
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < this.state.players; i++) {
         return pervState.players[i].totalScore = 0;
       }
     });
     this.setState((pervState) => {
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < this.state.players; i++) {
         return pervState.players[i].tempScore = 0;
       }
     });
@@ -101,15 +118,14 @@ export default class DiceGame extends Component {
   render() {
     return (
       <div className="flex-container">
-        <Player key="0" id="0" totalScore={this.state.players[0].totalScore} tempScore={this.state.players[0].tempScore} />
-        <div className="Columns-container">
+        <Player key="0" id="0" totalScore={this.state.players[0].totalScore} tempScore={this.state.players[0].tempScore} playerName={this.state.players[0].name} />
+        <div className="columns-container">
           <NewGameButton />
           {this.renderDices()}
-          <HoldAndDiceButtons callback={this.handelDices} text="ROLL DICE" />
-          <HoldAndDiceButtons callback={this.handelDices} text="HOLD" />
-          <TopPointsInput />
+          <HoldAndDiceButtons key="0" callback={this.handelDices} text="ROLL DICE" />
+          <HoldAndDiceButtons key="1" callback={this.handelHold} text="HOLD" />
         </div>
-        <Player key="1" id="1" totalScore={this.state.players[1].totalScore} tempScore={this.state.players[1].tempScore} />
+        <Player key="1" id="1" totalScore={this.state.players[1].totalScore} tempScore={this.state.players[1].tempScore} playerName={this.state.players[1].name} />
       </div>
     )
   }
