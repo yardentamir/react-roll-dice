@@ -24,13 +24,8 @@ export default class EnterGame extends React.Component {
     const { id, value } = event.target;
     sessionStorage.setItem(id, value);
     this.setState((pervState) => {
-      return pervState = { [id]: value };
+      return { ...pervState, [id]: value };
     });
-    console.log(this.state.name0)
-    // this.setState((pervState) => {
-    //   return pervState.playersTurn = 1 - pervState.playersTurn;
-    // });
-    sessionStorage.setItem('maxPoints', this.state.maxPoints);
   }
 
 
@@ -45,7 +40,7 @@ export default class EnterGame extends React.Component {
           <Button text="start" />
         </div>
 
-        <DiceGame name0={this.state.name0} name1={this.state.name1} maxPoints={this.state.maxPoints} />
+        <DiceGame />
 
       </>
 

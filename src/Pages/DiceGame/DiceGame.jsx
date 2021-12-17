@@ -10,27 +10,26 @@ export default class DiceGame extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props.maxPoints)
     this.state = {
-      pointsToWin: sessionStorage.getItem('maxPoints'),
+      pointsToWin: 0,
       gameOver: false,
       playersTurn: 0,
       players: [
         {
-          name: sessionStorage.getItem('name0'),
+          name: "",
           totalScore: 0,
           tempScore: 0,
         },
         {
-          name: sessionStorage.getItem('name1'),
+          name: "",
           totalScore: 0,
           tempScore: 0,
         },
-      ]
+      ],
     }
     this.handelDices = this.handelDices.bind(this);
     this.handelHold = this.handelHold.bind(this);
-    this.dicesArr = [];
+    this.dicesArr = [null, null];
   }
 
   handelDices() {
@@ -118,14 +117,14 @@ export default class DiceGame extends Component {
   render() {
     return (
       <div className="flex-container">
-        <Player key="0" id="0" totalScore={this.state.players[0].totalScore} tempScore={this.state.players[0].tempScore} playerName={this.state.players[0].name} />
+        <Player key="0" id="0" totalScore={this.state.players[0].totalScore} tempScore={this.state.players[0].tempScore} playerName={sessionStorage.getItem('name0')} />
         <div className="columns-container">
           <NewGameButton />
           {this.renderDices()}
           <HoldAndDiceButtons key="0" callback={this.handelDices} text="ROLL DICE" />
           <HoldAndDiceButtons key="1" callback={this.handelHold} text="HOLD" />
         </div>
-        <Player key="1" id="1" totalScore={this.state.players[1].totalScore} tempScore={this.state.players[1].tempScore} playerName={this.state.players[1].name} />
+        <Player key="1" id="1" totalScore={this.state.players[1].totalScore} tempScore={this.state.players[1].tempScore} playerName={sessionStorage.getItem('name1')} />
       </div>
     )
   }
