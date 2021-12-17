@@ -4,7 +4,7 @@ import "./Dice.scss";
 export default function Dice({ value }) {
   return (
     <div className="dice">
-      <img src={`../src/Images/dice/dice-${value}.png`} alt={`dice number ${value}`}></img>
+      <img src={`/assets/images/dice/dice-${value}.png`} alt={`dice number ${value}`}></img>
     </div>
   )
 }

@@ -11,17 +11,14 @@ export default class DiceGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pointsToWin: 0,
       gameOver: false,
       playersTurn: 0,
       players: [
         {
-          name: "",
           totalScore: 0,
           tempScore: 0,
         },
         {
-          name: "",
           totalScore: 0,
           tempScore: 0,
         },
@@ -29,7 +26,7 @@ export default class DiceGame extends Component {
     }
     this.handelDices = this.handelDices.bind(this);
     this.handelHold = this.handelHold.bind(this);
-    this.dicesArr = [null, null];
+    this.dicesArr = ["", ""];
   }
 
   handelDices() {
@@ -47,7 +44,10 @@ export default class DiceGame extends Component {
 
   renderDices() {
     return this.dicesArr.map((dice, i) => {
-      return <Dice key={i} value={dice} />
+      if (dice !== "") {
+        return <Dice key={i} value={dice} />
+      }
+      return "";
     })
   }
 
@@ -82,22 +82,19 @@ export default class DiceGame extends Component {
   }
 
   handelHold() {
-    this.state.players.forEach((player) => {
-      if (player.totalScore >= this.state.pointsToWin) {
-        this.winningMessage(player);
+    this.state.players.forEach((player, index) => {
+      if (player.totalScore >= sessionStorage.getItem("maxPoints")) {
+        this.winningMessage(index);
         return;
       }
     })
     this.ChangeTurn();
   }
 
-  winningMessage() {
-    this.state.players.forEach((player) => {
-      if (player.totalScore >= this.state.pointsToWin) {
-        console.log(player.name);
-        return;
-      }
-    })
+  winningMessage(winnerId) {
+    //
+
+    console.log(sessionStorage.getItem(`name${winnerId}`));
   }
 
   resetGame() {
@@ -117,14 +114,14 @@ export default class DiceGame extends Component {
   render() {
     return (
       <div className="flex-container">
-        <Player key="0" id="0" totalScore={this.state.players[0].totalScore} tempScore={this.state.players[0].tempScore} playerName={sessionStorage.getItem('name0')} />
+        <Player key={0} id={0} className="player-div" totalScore={this.state.players[0].totalScore} playerTurn={this.state.playersTurn} tempScore={this.state.players[0].tempScore} playerName={sessionStorage.getItem('name0')} />
         <div className="columns-container">
           <NewGameButton />
           {this.renderDices()}
-          <HoldAndDiceButtons key="0" callback={this.handelDices} text="ROLL DICE" />
-          <HoldAndDiceButtons key="1" callback={this.handelHold} text="HOLD" />
+          <HoldAndDiceButtons key={0} callback={this.handelDices} text="ROLL DICE" />
+          <HoldAndDiceButtons key={1} callback={this.handelHold} text="HOLD" />
         </div>
-        <Player key="1" id="1" totalScore={this.state.players[1].totalScore} tempScore={this.state.players[1].tempScore} playerName={sessionStorage.getItem('name1')} />
+        <Player key={1} id={1} className="player-div" totalScore={this.state.players[1].totalScore} playerTurn={this.state.playersTurn} tempScore={this.state.players[1].tempScore} playerName={sessionStorage.getItem('name1')} />
       </div>
     )
   }
