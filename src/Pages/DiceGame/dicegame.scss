@@ -6,11 +6,10 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100vw;
   position: absolute;
-  gap: 110px;
 
   & > * {
     text-align: center;
