@@ -1,7 +1,7 @@
 import React from 'react';
-import "./TopPointsInput.scss";
+import "./TextInputs.scss";
 
-export default function TopPointsInput({ callBack, text, id, value }) {
+export default function TextInputs({ callBack, text, id, value }) {
   return (<div>
     <p>{text}</p>
     <input type="text" id={id} onChange={callBack} value={value}></input>

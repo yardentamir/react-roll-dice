@@ -1,7 +1,7 @@
 import React from 'react';
 import DiceGame from '../DiceGame/DiceGame';
-import TopPointsInput from '../../Components/TopPointsInput/TopPointsInput';
-import Button from '../../Components/HoldAndDiceButtons/HoldAndDiceButtons';
+import TextInputs from '../../Components/TextInputs/TextInputs';
+import Buttons from '../../Components/Buttons/Buttons';
 
 export default class EnterGame extends React.Component {
   constructor(props) {
@@ -15,12 +15,11 @@ export default class EnterGame extends React.Component {
 
   renderNameInputs() {
     const arrOfInputComponents = [];
-    console.log(sessionStorage.getItem('name1'));
     sessionStorage.getItem('name1') || sessionStorage.setItem('name0', "Player 1")
     sessionStorage.getItem('name1') || sessionStorage.setItem('name1', "Player 2")
     sessionStorage.getItem('maxPoints') || sessionStorage.setItem('maxPoints', 100)
     for (let i = 0; i < 2; i++) {
-      arrOfInputComponents[i] = <TopPointsInput key={i} id={`name${i}`} value={this.state[`name${i}`]} callBack={this.saveToStorage} text={`Player ${i + 1} Name:`} />
+      arrOfInputComponents[i] = <TextInputs key={i} id={`name${i}`} value={this.state[`name${i}`]} callBack={this.saveToStorage} text={`Player ${i + 1} Name:`} />
     }
     return arrOfInputComponents;
   }
@@ -48,8 +47,8 @@ export default class EnterGame extends React.Component {
             <div>
               {this.renderNameInputs()}
             </div>
-            <TopPointsInput key="3" id="maxPoints" callBack={this.saveToStorage} text="Put Target Points" value={this.state.maxPoints} />
-            <Button text="start" callback={this.handelStartClick} />
+            <TextInputs key="3" id="maxPoints" callBack={this.saveToStorage} text="Put Target Points" value={this.state.maxPoints} />
+            <Buttons text="start" callback={this.handelStartClick} />
           </div>
         }
       </>
