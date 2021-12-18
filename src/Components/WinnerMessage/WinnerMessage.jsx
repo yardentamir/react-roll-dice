@@ -7,7 +7,7 @@ export default function WinnerMessage({ winnerName, newGameCallback, backToEnter
     <div id="myModal" className="modal">
       <div className="modal-content">
         <div className="center">
-          <h3>The Winner is {winnerName}</h3>
+          <h2>The Winner is {winnerName}</h2>
           <img src="/assets/images/icegif-3602.gif" alt="confetti" />
           <div className="button-group">
             <Buttons text="NEW GAME" callback={newGameCallback} />

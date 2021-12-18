@@ -4,10 +4,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 3vmin;
+  font-size: clamp(16px, 3vw, 32px);
   background-color: white;
   width: 100%;
   height: 100vh;
+  padding: 0 40px;
 
   & > * {
     margin: 20px 0;
@@ -15,8 +16,7 @@
 
   & > h2 {
     text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
-      1px 1px 1px rgba(0, 0, 0, 0.5);
-    color: #b6ac96;
+      2px 2px 2px rgba(0, 0, 0, 0.5);
   }
 }
 

@@ -1,6 +1,4 @@
 .modal {
-  // display: none;
-  border-radius: 15px;
   position: fixed;
   z-index: 1;
   padding-top: 100px;
@@ -17,14 +15,12 @@
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  padding: 0;
   border: 1px solid #888;
   max-width: 700px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation-name: animateTop;
   animation-duration: 0.4s;
-  padding: 10px;
-  height: 50vh;
+  padding: 50px 20px;
 }
 
 @keyframes animateTop {
