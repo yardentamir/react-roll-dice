@@ -4,6 +4,7 @@ import Buttons from "../../Components/Buttons/Buttons";
 import Player from "../../Components/player/Player";
 import Dice from "../../Components/Dice/Dice";
 import WinningMessage from "../../Components/WinnerMessage/WinnerMessage";
+import EnterGame from "../EnterGame/EnterGame"
 
 
 export default class DiceGame extends Component {
@@ -11,6 +12,7 @@ export default class DiceGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      back: false,
       winner: -1,
       playersTurn: 0,
       players: [
@@ -26,7 +28,9 @@ export default class DiceGame extends Component {
     }
     this.handelDices = this.handelDices.bind(this);
     this.handelHold = this.handelHold.bind(this);
-    this.dicesArr = ["", ""];
+    this.resetGame = this.resetGame.bind(this);
+    this.backToEnterGame = this.backToEnterGame.bind(this);
+    this.dicesArr = ["Roll", "Dice"];
   }
 
   handelDices() {
@@ -44,10 +48,7 @@ export default class DiceGame extends Component {
 
   renderDices() {
     return this.dicesArr.map((dice, i) => {
-      if (dice !== "") {
-        return <Dice key={i} value={dice} />
-      }
-      return "";
+      return <Dice key={i} value={dice} />
     })
   }
 
@@ -95,41 +96,61 @@ export default class DiceGame extends Component {
 
 
   resetGame() {
-    this.setState((pervState) => {
-      for (let i = 0; i < this.state.players; i++) {
-        return pervState.players[i].totalScore = 0;
+    this.setState(
+      {
+        back: false,
+        winner: -1,
+        playersTurn: 0,
+        players: [
+          {
+            totalScore: 0,
+            tempScore: 0,
+          },
+          {
+            totalScore: 0,
+            tempScore: 0,
+          },
+        ],
       }
-    });
-    this.setState((pervState) => {
-      for (let i = 0; i < this.state.players; i++) {
-        return pervState.players[i].tempScore = 0;
-      }
-    });
+    )
+    this.dicesArr = ["Roll", "Dice"];
+
+  }
+
+  backToEnterGame() {
+    this.resetGame();
+    this.setState({ back: true });
   }
 
 
   render() {
     return (
       <>
-        <div className="flex-container">
-          <Player key={0} id={0} className="player-div" totalScore={this.state.players[0].totalScore} playerTurn={this.state.playersTurn} tempScore={this.state.players[0].tempScore} playerName={sessionStorage.getItem('name0')} />
-          <div className="columns-container">
-            <div className="button-group">
-              <Buttons text="NEW GAME" />
-              <Buttons text="BACK" />
+        {this.state.back ? <EnterGame /> :
+          <div className="flex-container">
+            <Player key={0} id={0} className="player-div" totalScore={this.state.players[0].totalScore} playerTurn={this.state.playersTurn} tempScore={this.state.players[0].tempScore} playerName={sessionStorage.getItem('name0')} />
+            <div className="columns-container">
+              <div>
+                <h2 className="points-to-win">Points To Win: {sessionStorage.getItem('maxPoints')}</h2>
+                <div className="button-group">
+                  <Buttons text="NEW GAME" callback={this.resetGame} />
+                  <Buttons text="BACK" callback={this.backToEnterGame} />
+                </div>
+              </div>
+              <div>
+                {this.renderDices()}
+              </div>
+              <div className="button-group">
+                <Buttons key={0} callback={this.handelDices} text="ROLL DICE" />
+                <Buttons key={1} callback={this.handelHold} text="HOLD" />
+              </div>
             </div>
-            <div>
-              {this.renderDices()}
-            </div>
-            <div className="button-group">
-              <Buttons key={0} callback={this.handelDices} text="ROLL DICE" />
-              <Buttons key={1} callback={this.handelHold} text="HOLD" />
-            </div>
+            <Player key={1} id={1} className="player-div" totalScore={this.state.players[1].totalScore} playerTurn={this.state.playersTurn} tempScore={this.state.players[1].tempScore} playerName={sessionStorage.getItem('name1')} />
           </div>
-          <Player key={1} id={1} className="player-div" totalScore={this.state.players[1].totalScore} playerTurn={this.state.playersTurn} tempScore={this.state.players[1].tempScore} playerName={sessionStorage.getItem('name1')} />
-        </div>
-        {this.state.winner > -1 && <WinningMessage winnerId={this.state.winner} winnerName={sessionStorage.getItem(`name${this.state.winner}`)} />}
+        }
+        {this.state.winner > -1 && <WinningMessage winnerName={sessionStorage.getItem(`name${this.state.winner}`)} newGameCallback={this.resetGame} backToEnterGameCallback={this.backToEnterGame} />}
       </>
+
     )
   }
 }

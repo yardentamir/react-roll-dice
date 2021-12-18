@@ -3,3 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../public/assets/Fonts/Rubik-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: "Rubik", "Helvetica Neue", sans-serif;
+}
