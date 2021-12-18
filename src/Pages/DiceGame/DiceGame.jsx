@@ -37,7 +37,6 @@ export default class DiceGame extends Component {
     for (let i = 0; i < this.dicesArr.length; i++) {
       this.dicesArr[i] = Math.floor(Math.random() * 6) + 1;
     }
-    console.log(this.dicesArr);
     if (this.dicesArr[0] === this.dicesArr[1]) {
       this.resetCurrentPlayerValues();
       this.ChangeTurn();

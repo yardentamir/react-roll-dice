@@ -1,7 +1,7 @@
 import EnterGame from "./Pages/EnterGame/EnterGame";
 
 function App() {
-  return <EnterGame />; // component game
+  return <EnterGame />;
 }
 
 export default App;
