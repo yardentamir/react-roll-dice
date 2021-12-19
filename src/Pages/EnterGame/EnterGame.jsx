@@ -1,14 +1,14 @@
 import React from 'react';
 import DiceGame from '../DiceGame/DiceGame';
-import TextInputs from '../../Components/TextInputs/TextInputs';
+import TextInputs from '../../Components/CostumeInput/CostumeInput';
 import Buttons from '../../Components/Buttons/Buttons';
 import "./EnterGame.scss"
 
 export default class EnterGame extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      maxPoints: sessionStorage.getItem('maxPoints'), name0: sessionStorage.getItem('name0') || 'Player 1', name1: sessionStorage.getItem('name1') || 'Player 2', startGame: false
+      maxPoints: sessionStorage.getItem('maxPoints') || 100, name0: sessionStorage.getItem('name0') || 'Player 1', name1: sessionStorage.getItem('name1') || 'Player 2', startGame: false
     }
     this.saveToStorage = this.saveToStorage.bind(this);
     this.handelStartClick = this.handelStartClick.bind(this);
