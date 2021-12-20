@@ -13,7 +13,8 @@ export default function Player({ id, totalScore, tempScore, playerName, playerTu
         <h3>Current</h3>
         <p>{tempScore}</p>
       </div>
-    </div>)
+    </div>
+  )
 
 }
 

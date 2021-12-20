@@ -16,9 +16,6 @@ export default class EnterGame extends React.Component {
 
   renderNameInputs() {
     const arrOfInputComponents = [];
-    sessionStorage.getItem('name0') || sessionStorage.setItem('name0', "Player 1")
-    sessionStorage.getItem('name1') || sessionStorage.setItem('name1', "Player 2")
-    sessionStorage.getItem('maxPoints') || sessionStorage.setItem('maxPoints', 100)
     for (let i = 0; i < 2; i++) {
       arrOfInputComponents[i] = <TextInputs type="text" key={i} id={`name${i}`} value={this.state[`name${i}`]} callBack={this.saveToStorage} text={`Player ${i + 1} Name:`} />
     }
@@ -59,7 +56,6 @@ export default class EnterGame extends React.Component {
               </div>
             </div>
           </div>
-
         }
       </>
 
