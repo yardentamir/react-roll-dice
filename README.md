@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+#  AppleSeeds Bootcamp Mid Project - Recipe Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React classes project
 
-## Available Scripts
+## PROJECT LINK
 
-In the project directory, you can run:
+[Roll Dice Game](https://yarden-tamir-roll-dice-game.netlify.app)
 
-### `npm start`
+## PAGES
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### game setting
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+players names and target score using local storage to save the data between pages.
 
-### `npm test`
+### game
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+instructions: You need to get to the Points Target first to win. Try to avoid Doubles.
 
-### `npm run build`
+navigate between pages: moving between pages was implemented with a Ternary operator becouse The project was written at the time when we still didn't learn routing.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### main game state
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+back: to navigate between the two pages
+winner: stores the player array index
+playersTurn: stores the player array index that has the turn
+players: array of players that contains the total score and the temp score
+dicesArr: stores the dice results
+*playes names and target score is already saved in the local storage
+```
+this.state = {
+      back: false,
+      winner: -1,
+      playersTurn: 0,
+      players: [
+        {
+          totalScore: 0,
+          tempScore: 0,
+        },
+        {
+          totalScore: 0,
+          tempScore: 0,
+        },
+      ],
+    }
+    this.dicesArr = ["Roll", "Dice"];
+  ```
+  
