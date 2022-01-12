@@ -1,4 +1,4 @@
-#  AppleSeeds Bootcamp Mid Project - Recipe Site
+#  Roll Dice Game
 
 React classes project
 
