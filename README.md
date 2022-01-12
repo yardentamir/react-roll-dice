@@ -26,6 +26,7 @@ playersTurn: stores the player array index that has the turn
 players: array of players that contains the total score and the temp score
 dicesArr: stores the dice results
 *playes names and target score is already saved in the local storage
+
 ```
 this.state = {
       back: false,
@@ -44,4 +45,5 @@ this.state = {
     }
     this.dicesArr = ["Roll", "Dice"];
   ```
-  
+### design
+I used pure css to design the components and the layouts.
